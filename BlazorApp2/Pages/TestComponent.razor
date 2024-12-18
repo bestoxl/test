@@ -1,0 +1,27 @@
+﻿@page "/test"
+
+<h3>TestComponent</h3>
+
+<div class="tabs">
+    <button @onclick="() => SelectTab(typeof(A))" class="@GetTabClass(typeof(A))">Tab 1</button>
+    <button @onclick="() => SelectTab(typeof(B))" class="@GetTabClass(typeof(B))">Tab 2</button>
+</div>
+
+<DynamicComponent Type="@currentComponent" />
+
+@* <A/>
+<B/> *@
+
+@code {
+    private Type? currentComponent = typeof(A);
+
+    private void SelectTab(Type componentType)
+    {
+        currentComponent = componentType;
+    }
+
+    private string GetTabClass(Type componentType)
+    {
+        return currentComponent == componentType ? "active-tab" : "";
+    }
+}
